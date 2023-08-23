@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.FileWriter;
 
 
 public class Main {
@@ -18,6 +19,13 @@ public class Main {
 		mainClass.emptyCheck();
 		
 
+	}
+
+
+	public void mainPage() {
+		for(int i =0; i < to_do_list.size(); i++) {
+			System.out.println(to_do_list.get(i));
+		}
 	}
 
 	public void emptyCheck() {
@@ -43,7 +51,7 @@ public class Main {
 			}
 
 			else {
-				System.out.println("Closing program");
+				mainPage();
 			}
 
 		}
@@ -69,10 +77,9 @@ public class Main {
 		to_do_list.add(added_item);
 
 	try {
-		PrintWriter writer = new PrintWriter("to_do_list.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter(new FileWriter("to_do_list.txt", true));
 		writer.println(added_item);
 		writer.close();
-
 	}
 
 	catch (IOException e) {
