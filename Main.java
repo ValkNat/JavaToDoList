@@ -25,6 +25,15 @@ public class Main {
 	try {
 
 		if (new File("to_do_list.txt").exists()) {
+
+			//New region of code to add pre-existing tasks in to_do_list.txt to to_do_list ArrayList
+			File file = new File("to_do_list.txt");
+			Scanner filescanner = new Scanner(file);
+			while (filescanner.hasNextLine()) {
+				to_do_list.add(filescanner.nextLine());
+			}
+			System.out.println(to_do_list);
+
 			System.out.println("File already exists! Add task now? [y/n]");
 			Scanner scanner = new Scanner(System.in);
 			String add_task = scanner.nextLine();
@@ -56,7 +65,31 @@ public class Main {
 
 	public void add_item(Scanner scanner) {
 		System.out.println("What task would you like to add?");
-		to_do_list.add(scanner.nextLine());
+		String added_item = scanner.nextLine();
+		to_do_list.add(added_item);
+
+	try {
+		PrintWriter writer = new PrintWriter("to_do_list.txt", "UTF-8");
+		writer.println(added_item);
+		writer.close();
+
 	}
 
-}
+	catch (IOException e) {
+            System.out.println("An error occurred while handling the file: " + e.getMessage());
+        }
+
+		System.out.println("Current to-do list:");
+
+		for(int i = 0; i < to_do_list.size(); i++) {
+			System.out.println(to_do_list.get(i));
+		}
+
+
+
+
+	}
+
+
+	}
+
