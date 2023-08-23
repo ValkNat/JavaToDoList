@@ -23,9 +23,35 @@ public class Main {
 
 
 	public void mainPage() {
+
+		//Displays tasks
 		for(int i =0; i < to_do_list.size(); i++) {
 			System.out.println(to_do_list.get(i));
 		}
+
+		//Options menu
+		System.out.println("[What would you like to do?");
+		String options = "(1): Add Task \n (2): Delete Task \n (3): Close Program";
+		System.out.println(options);
+		Scanner options_scanner = new Scanner(System.in);
+		String option_selected = options_scanner.nextLine();
+
+		//Option selection menu
+		switch (option_selected) {
+
+		case "1":
+			add_item(options_scanner);
+			break;
+
+		case "3":
+			System.exit(0);
+
+		default:
+			System.out.println("Error");
+
+		}
+
+		
 	}
 
 	public void emptyCheck() {
@@ -86,12 +112,8 @@ public class Main {
             System.out.println("An error occurred while handling the file: " + e.getMessage());
         }
 
-		System.out.println("Current to-do list:");
-
-		for(int i = 0; i < to_do_list.size(); i++) {
-			System.out.println(to_do_list.get(i));
-		}
-
+        //Returns to home-page post-adding task
+		mainPage();
 
 
 
