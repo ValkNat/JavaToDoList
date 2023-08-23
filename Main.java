@@ -26,6 +26,7 @@ public class Main {
 
 		//Displays tasks
 		for(int i =0; i < to_do_list.size(); i++) {
+			System.out.print("[" + i + "] ");
 			System.out.println(to_do_list.get(i));
 		}
 
@@ -42,6 +43,9 @@ public class Main {
 		case "1":
 			add_item(options_scanner);
 			break;
+
+		case "2":
+			delete_item(options_scanner);
 
 		case "3":
 			System.exit(0);
@@ -114,6 +118,30 @@ public class Main {
 
         //Returns to home-page post-adding task
 		mainPage();
+
+
+	}
+
+
+	public void delete_item(Scanner scanner) {
+		System.out.println("Please enter index number of desired item to delete...");
+		int index = scanner.nextInt();
+		to_do_list.remove(index);
+
+		//Following code also deletes item from to_do_list.txt
+		try {
+			PrintWriter writer = new PrintWriter(new FileWriter("to_do_list.txt", false));
+			for (String task : to_do_list) {
+				writer.println(task);
+			}
+			writer.close();
+		}
+
+		catch (IOException e) {
+            System.out.println("An error occurred while handling the file: " + e.getMessage());
+        }
+
+        mainPage();
 
 
 
